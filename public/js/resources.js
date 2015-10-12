@@ -13,6 +13,29 @@ var allEnemies;
 var allWaters;
 var star;
 var level;
+var socket=io();
+var playerName = 'aa';
+
+//TODO: use JS live
+$('#inputForm').submit(function(event) {
+    event.preventDefault();
+    playerName = $('input').val();
+
+    $('form').hide();
+    $('#welcome').html('Hi ' + playerName + '! Press space to start');
+
+    return false;
+});
+
+socket.on('points', function(leaderboard){
+    console.log(leaderboard);
+    var msg = '';
+    for (var i=0; i<leaderboard.length; i++) {
+        msg += '<h3>' + leaderboard[i] + '</h3>';
+    }
+    $('#leaderboard').html(msg);
+
+});
 
 (function() {
     var resourceCache = {};

@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- TODO: use jquery live and move the form after the JS files -->
+    <div id='hello' class='message'>
+        <h1>Welcome Frogger</h1>
+        <h1 id='welcome'>Type your name and press enter to begin</h1>
+        <form id='inputForm'>
+            <input type='text' name='playerName' autocomplete='off'/>
+            <input type="submit" value="Go">
+        </form>
+    </div>
+
     <script src="js/resources.js"></script>
     <script src="js/entity.js"></script>
     <script src="js/bug.js"></script>
@@ -18,10 +30,6 @@
     <script src="js/board.js"></script>
     <script src="js/engine.js"></script>
 
-    <div id='hello' class='message'>
-        <h1>Welcome Frogger</h1>
-        <h1>Press space to start</h1>
-    </div>
 
     <div id='nextLevel' class='message'>
         <h1>Good work!</h1>
@@ -39,6 +47,11 @@
 
     <div class='points'>
 	<h2 id='points'>0 points</h2>
+    </div>
+
+    <div class='leaderboard'>
+	<h2>Leaders</h2>
+	<div id='leaderboard'></div>
     </div>
 
 </body>

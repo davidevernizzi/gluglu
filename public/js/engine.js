@@ -176,11 +176,9 @@ var Engine = (function(global) {
             gameStarted = true;
             $('.message').hide();
             timeout = setTimeout(function() {
-//                gameStarted = false;
                 timeToWait -= 0.10;
                 level ++;
                 $('#level').html('level ' + level);
-//                $('#nextLevel').show();
             }, 10000);
             main();
         }

@@ -31,4 +31,6 @@ Player.prototype.increasePoints = function() {
 	this.points++;
 	msg = this.points + ' points';
 	$('#points').html(msg);
+    socket.emit('points', this.points + ' -- ' + playerName);
+    console.log('points change event');
 }
