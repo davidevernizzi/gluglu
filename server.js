@@ -4,9 +4,9 @@ var http=require('http').Server(app);
 var io=require('socket.io')(http);
 
 var leaderboard = [
-'20 -- Vercingetorige',
-'10 -- foo',
-'2 -- bar',
+    { socketId: 'aaa', playerName: 'Vercingetorige', points: 20 },
+    { socketId: 'bbb', playerName: 'Foo', points: 10 },
+    { socketId: 'ccc', playerName: 'Bar', points: 2 },
 ]
 
 app.use(express.static('public'));
@@ -19,14 +19,20 @@ io.on('connection', function(socket){
     console.log('a user connected');
 
     socket.on('points', function(newPoints) {
-        console.log('points changed: ' + newPoints);
+        for(i=0; i<leaderboard; i++) {
+            if(leaderboard[i].socketId == newPoints.socketId) {
+                leaderboard.splice(i,1);
+            }
+        }
+
         leaderboard.push(newPoints);
         console.log(leaderboard);
-        leaderboard.sort();
+        leaderboard.sort(function(a, b) {
+            return b.points - a.points;
+        });
         console.log(leaderboard);
         leaderboard.splice(3, leaderboard.length);
         console.log(leaderboard);
-        //TODO: better update leaderboard
 
         socket.emit('points', leaderboard);
     });

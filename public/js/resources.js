@@ -14,7 +14,9 @@ var allWaters;
 var star;
 var level;
 var socket=io();
-var playerName = 'aa';
+var playerName = 'No name';
+
+var socketId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
 
 //TODO: use JS live
 $('#inputForm').submit(function(event) {
@@ -31,7 +33,7 @@ socket.on('points', function(leaderboard){
     console.log(leaderboard);
     var msg = '';
     for (var i=0; i<leaderboard.length; i++) {
-        msg += '<h3>' + leaderboard[i] + '</h3>';
+        msg += '<h3>' + leaderboard[i].playerName + ' -- ' + leaderboard[i].points + '</h3>';
     }
     $('#leaderboard').html(msg);
 
