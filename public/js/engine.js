@@ -28,8 +28,7 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime,
-        timeToWait;
+        lastTime;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -175,7 +174,7 @@ var Engine = (function(global) {
         if (!gameStarted && e.keyCode == 32) {
             gameStarted = true;
             $('.message').hide();
-            timeout = setTimeout(function() {
+            timeout = setInterval(function() {
                 timeToWait -= 0.10;
                 level ++;
                 $('#level').html('level ' + level);
