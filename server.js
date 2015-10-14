@@ -4,8 +4,7 @@ var http=require('http').Server(app);
 var io=require('socket.io')(http);
 
 var leaderboard = [
-    { socketId: 'aaa', playerName: 'Vercingetorige', points: 20 },
-    { socketId: 'bbb', playerName: 'Foo', points: 10 },
+    { socketId: 'aaa', playerName: 'Vercingetorige', points: 3 },
     { socketId: 'ccc', playerName: 'Bar', points: 2 },
 ]
 
@@ -19,9 +18,14 @@ io.on('connection', function(socket){
     console.log('a user connected');
 
     socket.on('points', function(newPoints) {
-        for(i=0; i<leaderboard; i++) {
+        console.log(leaderboard);
+        for(i=0; i<leaderboard.length; i++) {
             if(leaderboard[i].socketId == newPoints.socketId) {
+                console.log('removing leaderboard[i]');
                 leaderboard.splice(i,1);
+            }
+            else {
+                console.log('keeping leaderboard[i]');
             }
         }
 
@@ -30,9 +34,9 @@ io.on('connection', function(socket){
         leaderboard.sort(function(a, b) {
             return b.points - a.points;
         });
-        console.log(leaderboard);
         leaderboard.splice(3, leaderboard.length);
         console.log(leaderboard);
+        console.log('----------');
 
         socket.emit('points', leaderboard);
     });

@@ -26,6 +26,13 @@ $('#inputForm').submit(function(event) {
     $('form').hide();
     $('#welcome').html('Hi ' + playerName + '! Press space to start');
 
+    var points = {
+        socketId: socketId,
+    playerName: playerName,
+    points: this.points
+    }
+    socket.emit('points', points);
+
     return false;
 });
 
