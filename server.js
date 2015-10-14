@@ -21,16 +21,11 @@ io.on('connection', function(socket){
         console.log(leaderboard);
         for(i=0; i<leaderboard.length; i++) {
             if(leaderboard[i].socketId == newPoints.socketId) {
-                console.log('removing leaderboard[i]');
                 leaderboard.splice(i,1);
-            }
-            else {
-                console.log('keeping leaderboard[i]');
             }
         }
 
         leaderboard.push(newPoints);
-        console.log(leaderboard);
         leaderboard.sort(function(a, b) {
             return b.points - a.points;
         });

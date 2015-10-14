@@ -26,6 +26,9 @@ function gameOver(msg) {
 
     timeToWait = 0.75;
     level = 1;
+
+    socketId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+
     $('#level').html('level ' + level);
 
     $('#points').html('0 points');
